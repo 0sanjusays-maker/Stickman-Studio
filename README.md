@@ -437,6 +437,28 @@ python orchestrator.py "Your topic here" --video-mode slideshow
 
 ---
 
+## 🎞️ Featured Film — "THE BOX" (2:40 silent)
+
+A complete, fully animated silent film included in this repo — **1 stickman, 1
+box, zero dialogue**. Every frame is drawn procedurally (Pillow) and the score is
+synthesised with numpy: no AI APIs, no external assets.
+
+<video src="films/the_box/out/the_box.mp4" controls width="720"></video>
+
+The journey: curiosity → obsession → anger → defeat → discovery. The box never
+opens the way he expects — because the point was never the box.
+
+- 🎬 Film: [`films/the_box/out/the_box.mp4`](films/the_box/out/the_box.mp4)
+- 📝 Visual screenplay (second-by-shot): [`films/the_box/screenplay.md`](films/the_box/screenplay.md)
+- ⚙️ Engine + timeline + score: [`films/the_box/`](films/the_box/)
+
+```bash
+.venv/bin/python films/the_box/render.py        # re-render in ~1 min
+.venv/bin/python films/the_box/serve.py 8000    # screening page
+```
+
+---
+
 ## 📊 Dashboard
 
 Launch the full GUI:

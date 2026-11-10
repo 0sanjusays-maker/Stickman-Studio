@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE BOX — a stickman silent film</title>
+<style>
+  :root { --ink:#141418; --gold:#e8b64c; --paper:#f6f4ee; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #101014; color: #e9e7e1;
+    font-family: "DejaVu Sans", system-ui, sans-serif;
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+    padding: 28px 16px 60px;
+  }
+  header { text-align: center; margin-bottom: 22px; }
+  h1 { font-size: clamp(28px, 5vw, 52px); letter-spacing: .22em; font-weight: 700; }
+  h1 span { color: var(--gold); }
+  .sub { color: #9b98a2; margin-top: 8px; letter-spacing: .12em; font-size: 13px; text-transform: uppercase; }
+  .stage {
+    width: min(1120px, 96vw); aspect-ratio: 16/9; background: #000;
+    border-radius: 12px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,.55);
+    border: 1px solid #26262e;
+  }
+  video { width: 100%; height: 100%; display: block; }
+  .meta { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; margin: 18px 0 26px; }
+  .chip {
+    border: 1px solid #2c2c36; border-radius: 999px; padding: 7px 16px;
+    font-size: 12px; letter-spacing: .10em; color: #b9b6c0; text-transform: uppercase;
+  }
+  .chip b { color: var(--gold); font-weight: 600; }
+  nav { width: min(1120px, 96vw); }
+  h2 { font-size: 13px; letter-spacing: .28em; color: #7d7a86; text-transform: uppercase; margin-bottom: 12px; }
+  .chapters { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+  .chapter {
+    display: block; text-decoration: none; color: #d9d6de;
+    background: #17171d; border: 1px solid #24242c; border-radius: 10px; padding: 12px 14px;
+    transition: border-color .15s, transform .15s;
+  }
+  .chapter:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .chapter .t { color: var(--gold); font-size: 12px; letter-spacing: .08em; }
+  .chapter .n { font-size: 14px; margin-top: 4px; font-weight: 600; letter-spacing: .04em; }
+  .chapter .d { font-size: 12px; color: #8d8a95; margin-top: 3px; }
+  footer { margin-top: 40px; color: #5d5a66; font-size: 12px; letter-spacing: .12em; text-align: center; line-height: 1.9; }
+  footer a { color: #8d8a95; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>THE <span>BOX</span></h1>
+    <div class="sub">a stickman silent film &nbsp;·&nbsp; 2:40 &nbsp;·&nbsp; no dialogue</div>
+  </header>
+
+  <div class="stage">
+    <video id="film" controls preload="metadata">
+      <source src="the_box.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="meta">
+    <div class="chip">Genre <b>Motivational</b></div>
+    <div class="chip">Cast <b>1 stickman · 1 box</b></div>
+    <div class="chip">Score <b>Original · synthesised</b></div>
+    <div class="chip">Format <b>720p · 24 fps</b></div>
+    <div class="chip">Dialogue <b>None</b></div>
+  </div>
+
+  <nav>
+    <h2>Chapters — click to jump</h2>
+    <div class="chapters">
+      <a class="chapter" href="#" data-t="0"><div class="t">0:00</div><div class="n">1 · Empty World</div><div class="d">5 seconds of nothing… then a walk, and a THUK.</div></a>
+      <a class="chapter" href="#" data-t="10"><div class="t">0:10</div><div class="n">2 · The Box</div><div class="d">Touch. Poke. Lift. Shake — and a glow.</div></a>
+      <a class="chapter" href="#" data-t="20"><div class="t">0:20</div><div class="n">3 · Curiosity</div><div class="d">Four attempts. One very stubborn box.</div></a>
+      <a class="chapter" href="#" data-t="35"><div class="t">0:35</div><div class="n">4 · Obsession</div><div class="d">The training montage — and the freeze.</div></a>
+      <a class="chapter" href="#" data-t="60"><div class="t">1:00</div><div class="n">5 · Anger</div><div class="d">Throw. Hammer. Stone. Jump. The box: fine.</div></a>
+      <a class="chapter" href="#" data-t="80"><div class="t">1:20</div><div class="n">6 · Lowest Point</div><div class="d">Rain. Stillness. Ten seconds of silence.</div></a>
+      <a class="chapter" href="#" data-t="100"><div class="t">1:40</div><div class="n">7 · The Discovery</div><div class="d">A glint on a tiny button. CLICK.</div></a>
+      <a class="chapter" href="#" data-t="120"><div class="t">2:00</div><div class="n">8 · Inside</div><div class="d">No gold. No treasure. A mirror.</div></a>
+      <a class="chapter" href="#" data-t="140"><div class="t">2:20</div><div class="n">9 · Ending</div><div class="d">The reveal: he was never alone with that box.</div></a>
+    </div>
+  </nav>
+
+  <footer>
+    PROCEDURAL ANIMATION · RENDERED WITH PILLOW + FFMPEG · SCORE SYNTHESISED WITH NUMPY<br>
+    <a href="screenplay.md">visual screenplay</a> &nbsp;·&nbsp; stickman studio
+  </footer>
+
+<script>
+  const film = document.getElementById('film');
+  document.querySelectorAll('.chapter').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      film.currentTime = parseFloat(a.dataset.t);
+      film.play();
+      film.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+</script>
+</body>
+</html>

@@ -25,6 +25,12 @@ ideas.json
 !samples/
 !samples/*
 
+# Allow THE BOX film deliverable (like samples)
+!films/the_box/out/
+!films/the_box/out/the_box.mp4
+films/the_box/out/audio.wav
+films/the_box/out/*.png
+
 # OAuth & tokens
 client_secrets.json
 youtube_token.json
